@@ -353,9 +353,9 @@ function selectProfile(nickname) {
     document.querySelector("#account-select .selected").innerHTML = (findByNickname(nickname)) ? document.getElementById(nickname + "-profile").innerHTML : `<div class="avatar"></div>Select Profile`;
     currentNickname = nickname;
     document.querySelector("#authorize").innerText = `Authorize${(findByNickname(nickname)) ? " as " + nickname : ""}`;
-    window.localStorage.setItem("lastProfile", nickname);
+    window.localStorage.setItem("lastProfile", nickname ? nickname : "");
     let c = getParameter("c");
-    openContent(c ? "authorize" : "manage");
+    openContent(c ? "authorize" : (nickname ? "manage" : ""));
 }
 
 function toggleAccountSelect() {
