@@ -1,6 +1,54 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leqium Auth</title>
+    <link rel="stylesheet" href="./style.css">
+    <!-- <script src="./register-sw.js"></script> -->
+</head>
 <body>
-<h1>Test GitHub Pages page</h1>
+    <div class="main-content">
+        <h1>Authorize in <b id="host"></b></h1>
+        <div id="account-select">
+            <button class="selected"><div class="avatar"></div>Select Profile</button>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+            <div class="dropdown">
+                <button id="new-profile" disabled><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M12 5v14"/></svg>New Profile</button>
+                <button id="import-profile" disabled><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M12 18v-6"/><path d="m9 15 3 3 3-3"/></svg>Import Profile</button>
+            </div>
+        </div>
+        <div class="authorize">
+            Server will be able to:
+            <ul>
+                <li>Get your nickname</li>
+                <li>Get your avatar</li>
+                <li>Get your bio</li>
+                <li>Get your public key</li>
+            </ul>
+            <button class="primary" id="authorize">Authorize</button>
+        </div>
+        <div class="create-profile hidden">
+            <input id="nickname" type="nickname" maxlength="32" placeholder="Nickname">
+            <input id="avatar" type="file" accept="image/*"">
+            <textarea id="bio" maxlength="1000" placeholder="Bio"></textarea>
+            After creation, keep .leqium file safely on your device. Using it, you can import profile and authorize on other devices.
+            <button class="primary" id="create-profile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="loader hidden"><path d="M21 12a9 9 0 1 1-6.219-8.56"/></svg>Create Profile</button>
+        </div>
+    </div>
+    <div class="popup-wrapper hidden" id="edit-avatar">
+    <div class="popup">
+        <div class="canvas-wrapper">
+            <canvas width="256" height="256"></canvas>
+        </div>
+        <div class="action-buttons">
+            <button class="cancel secondary">Cancel</button>
+            <button class="confirm primary">Confirm</button>
+        </div>
+    </div>
+    </div>
+    <!-- TODO: General confirmation popup -->
+    <script src="./script.js"></script>
+    <script src="./edit-avatar.js"></script>
 </body>
 </html>

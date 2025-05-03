@@ -1,0 +1,363 @@
+@font-face {
+    font-family: "Iosevka Aile";
+    font-weight: 400;
+    font-stretch: normal;
+    font-style: normal;
+    src: url("./IosevkaAile-Regular.woff2") format("woff2");
+    font-display: swap;
+}
+@font-face {
+    font-family: "Iosevka Aile";
+    font-weight: 700;
+    font-stretch: normal;
+    font-style: normal;
+    src: url("./IosevkaAile-Bold.woff2") format("woff2");
+    font-display: swap;
+}
+
+:root {
+    --accent-effect: 8%;
+    --accent: rgb(173, 50, 158);
+    --accent-text: #fff;
+    --bg-1: color-mix(in srgb, #111111, var(--accent) var(--accent-effect));
+    --bg-2: color-mix(in srgb, #151515, var(--accent) var(--accent-effect));
+    --bg-3: color-mix(in srgb, #1b1b1b, var(--accent) var(--accent-effect));
+    color-scheme: dark;
+}
+@media (prefers-color-scheme: light) {
+:root {
+    --bg-1: color-mix(in srgb, #dcdcdc, var(--accent) var(--accent-effect));
+    --bg-2: color-mix(in srgb, #f2f2f2, var(--accent) var(--accent-effect));
+    --bg-3: color-mix(in srgb, #f6f6f6, var(--accent) var(--accent-effect));
+    color-scheme: light;
+}
+}
+
+html, body {
+    margin: 0;
+    touch-action: none;
+    background: var(--bg-1);
+
+    font-family: "Iosevka Aile", sans-serif;
+    user-select: none;
+    -webkit-user-select: none;
+}
+::selection {
+    background-color: var(--accent);
+    color: var(--accent-text);
+}
+*:focus-visible {
+    outline: 2px solid var(--accent);
+}
+
+.main-content > h1 {
+    margin: 10px;
+    text-align: center;
+    font-weight: 400;
+    grid-area: title;
+}
+
+h1 > b {
+    color: var(--accent);
+}
+
+.main-content {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    padding: 10px;
+    display: grid;
+    grid-template-areas:
+    "title"
+    "profiles"
+    "content"
+    ;
+    grid-template-columns: 100%;
+    grid-template-rows: 1fr;
+    grid-auto-rows: max-content;
+    background: var(--bg-2);
+    min-width: min(100%, 300px);
+    max-width: 400px;
+    border-radius: 20px;
+}
+button {
+    position: relative;
+    padding: 0;
+    text-align: left;
+    background: none;
+    border: none;
+    font-family: inherit;
+    font-weight: 700;
+    line-height: inherit;
+}
+button:hover:after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: #7775;
+    border-radius: 10px;
+}
+button:active:after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: #0003;
+    border-radius: 10px;
+}
+button.primary {
+    padding: 0 10px;
+    text-align: center;
+    height: 35px;
+    border-radius: 10px;
+    background: var(--accent);
+    color: var(--accent-text);
+}
+button.primary svg {
+    position: absolute;
+    margin: 5.5px;
+    top: 0;
+    left: 0;
+    width: 24px;
+    height: 24px;
+}
+button.secondary {
+    padding: 0 10px;
+    text-align: center;
+    height: 35px;
+    border-radius: 10px;
+}
+.loader:not(.hidden) {
+    animation: rotate 1s infinite;
+}
+.loader.hidden {
+    display: none;
+}
+@keyframes rotate {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+input {
+    padding: 8px;
+    height: 35px;
+    line-height: 35px;
+    border: none;
+    border-radius: 10px;
+    font-family: inherit;
+    background: var(--bg-3);
+    box-sizing: border-box;
+}
+input::placeholder {
+    color: #888a;
+}
+input[type="file"] {
+    padding: 0 10px;
+}
+#avatar:after {
+    content: "Avatar";
+    float: right;
+    color: #888a;
+}
+::-webkit-file-upload-button {
+    background: none;
+    border: none;
+    font-family: inherit;
+}
+textarea {
+    padding: 8px;
+    border: none;
+    resize: none;
+    height: 200px;
+    border-radius: 10px;
+    font-family: inherit;
+    background: var(--bg-3);
+    box-sizing: border-box;
+}
+textarea::placeholder {
+    color: #888a;
+}
+#authorize, #create-profile {
+    margin-top: 20px;
+    width: 100%;
+}
+
+#account-select {
+    grid-area: profiles;
+    position: relative;
+    background: var(--bg-3);
+    height: 40px;
+    line-height: 40px;
+    border: none;
+    border-radius: 10px;
+    font-family: inherit;
+    font-weight: 700;
+    margin: 20px 10px;
+    width: calc(100% - 20px);
+    z-index: 2;
+}
+#account-select .selected {
+    position: relative;
+    width: 100%;
+    height: 40px;
+    line-height: 40px;
+    background: var(--bg-3);
+    border-radius: inherit;
+    box-shadow: 0 5px 5px -5px var(--bg-1);
+}
+#account-select .selected:hover:after {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: inherit;
+    background: #7773;
+}
+#account-select > svg {
+    position: absolute;
+    top: 0;
+    right: 0;
+    float: right;
+    color: #7775;
+    pointer-events: none;
+}
+#account-select .dropdown {
+    display: grid;
+    grid-template-rows: 100%;
+    grid-template-rows: 1fr;
+    grid-auto-rows: max-content;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    max-height: 50vh;
+
+    background: var(--bg-3);
+    box-shadow: 0 0 5px 5px var(--bg-1);
+    border-radius: inherit;
+    z-index: -1;
+    overflow: auto;
+    scrollbar-width: none;
+    transition: opacity 0.3s ease-in-out, top 0.3s ease-in-out;
+}
+#account-select .dropdown > button {
+    height: 40px;
+    line-height: 40px;
+    overflow: hidden;
+}
+#account-select svg {
+    margin: 5px;
+    width: 30px;
+    height: 30px;
+    vertical-align: middle;
+}
+#account-select .dropdown > button:hover {
+    background: #7773;
+    border-radius: inherit;
+}
+#account-select:not(.expanded) .dropdown {
+    opacity: 0;
+    top: 50%;
+    pointer-events: none;
+}
+
+.avatar {
+    margin: 5px;
+    width: 30px;
+    height: 30px;
+    background-color: #7775;
+    background-size: contain;
+    background-repeat: no-repeat;
+    border-radius: 50%;
+    float: left;
+}
+
+.authorize {
+    grid-area: content;
+    height: 187px;
+}
+
+.create-profile {
+    grid-area: content;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    height: 425px;
+}
+.authorize, .create-profile {
+    transition: opacity 0.5s ease-in-out, height 0.5s ease-in-out;
+}
+.authorize.hidden, .create-profile.hidden {
+    opacity: 0;
+    height: 187px;
+    pointer-events: none;
+}
+
+.popup-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: #0005;
+}
+.popup-wrapper.hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.popup {
+    position: relative;
+    padding: 10px;
+    padding-bottom: 60px;
+    width: min(300px, 100vw);
+    background: var(--bg-2);
+    border-radius: 20px;
+}
+.popup .action-buttons {
+    position: absolute;
+    display: flex;
+    right: 10px;
+    bottom: 10px;
+    gap: 10px;
+}
+
+#edit-avatar .popup {
+    width: min(400px, 100vw);
+    height: min(400px, 100vw);
+}
+#edit-avatar .canvas-wrapper {
+    position: relative;
+    width: min(400px, 100vw);
+    height: min(400px, 100vw);
+    border-radius: 10px;
+    overflow: hidden;
+}
+#edit-avatar .canvas-wrapper:after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(#0000 calc(50% * cos(45deg)), #fff5 calc(50% * cos(45deg)), #fff5 calc(51% * cos(45deg)), #0005 calc(51% * cos(45deg)));
+    pointer-events: none;
+}
+#edit-avatar canvas {
+    position: relative;
+    width: 100%;
+}
