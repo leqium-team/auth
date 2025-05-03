@@ -8,7 +8,7 @@
     <!-- <script src="./register-sw.js"></script> -->
 </head>
 <body>
-    <div class="main-content">
+    <div class="main-content" style="display: none;">
         <h1>Authorize in <b id="host"></b></h1>
         <div id="account-select">
             <button class="selected"><div class="avatar"></div>Select Profile</button>
@@ -18,7 +18,7 @@
                 <button id="import-profile" disabled><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M12 18v-6"/><path d="m9 15 3 3 3-3"/></svg>Import Profile</button>
             </div>
         </div>
-        <div class="authorize">
+        <div class="authorize hidden no-anim">
             Server will be able to:
             <ul>
                 <li>Get your nickname</li>
@@ -26,15 +26,24 @@
                 <li>Get your bio</li>
                 <li>Get your public key</li>
             </ul>
-            <button class="primary" id="authorize">Authorize</button>
+            <button class="primary" id="authorize" disabled>Authorize</button>
         </div>
-        <div class="create-profile hidden">
+        <div class="create-profile hidden no-anim">
             <input id="nickname" type="nickname" maxlength="32" placeholder="Nickname">
             <input id="avatar" type="file" accept="image/*"">
             <textarea id="bio" maxlength="1000" placeholder="Bio"></textarea>
             After creation, keep .leqium file safely on your device. You can use the file to import profile and authorize on other devices.
-            <button class="primary" id="create-profile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="loader hidden"><path d="M21 12a9 9 0 1 1-6.219-8.56"/></svg>Create Profile</button>
+            <button class="primary" id="create-profile" disabled><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="loader hidden"><path d="M21 12a9 9 0 1 1-6.219-8.56"/></svg>Create Profile</button>
         </div>
+        <div class="manage-profiles hidden no-anim">
+            <input id="nickname-edit" type="nickname" maxlength="32" placeholder="Nickname">
+            <input id="avatar-edit" type="file" accept="image/*"">
+            <textarea id="bio-edit" maxlength="1000" placeholder="Bio"></textarea>
+            To see changes on server you must authorize using Leqium Auth again.
+            <button class="primary" id="edit-profile" disabled>Edit Profile</button>
+            <button class="secondary" id="delete-profile" disabled>Delete Profile</button>
+        </div>
+        <a href="./">Manage profiles</a>
     </div>
     <div class="popup-wrapper hidden" id="edit-avatar">
     <div class="popup">
@@ -47,7 +56,26 @@
         </div>
     </div>
     </div>
-    <!-- TODO: General confirmation popup -->
+    <div class="popup-wrapper hidden" id="replace-popup">
+    <div class="popup">
+        <h1>Are you sure?</h1>
+        <span>Profile with that nickname already exists in your cache. Replace existing profile with a new one?</span>
+        <div class="action-buttons">
+            <button class="cancel secondary">Cancel</button>
+            <button class="confirm primary">Confirm</button>
+        </div>
+    </div>
+    </div>
+    <div class="popup-wrapper hidden" id="delete-popup">
+    <div class="popup">
+        <h1>Are you sure?</h1>
+        <span>Profile will be deleted from Leqium Auth cache. <b>This cannot be reverted.</b> You can still import profile back if you have .leqium file.</span>
+        <div class="action-buttons">
+            <button class="cancel secondary">Cancel</button>
+            <button class="confirm primary">Confirm</button>
+        </div>
+    </div>
+    </div>
     <script src="./script.js"></script>
     <script src="./edit-avatar.js"></script>
 </body>

@@ -74,6 +74,10 @@ document.querySelector("#avatar").addEventListener("change", async function (e) 
     if (this.files.length == 0) return;
     startEditAvatar(await toBase64(this.files[0]));
 });
+document.querySelector("#avatar-edit").addEventListener("change", async function (e) {
+    if (this.files.length == 0) return;
+    startEditAvatar(await toBase64(this.files[0]));
+});
 document.querySelector("#edit-avatar .cancel").addEventListener("click", () => {
     document.querySelector("#avatar").value = "";
     editedAvatar = undefined;

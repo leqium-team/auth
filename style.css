@@ -81,6 +81,18 @@ h1 > b {
     max-width: 400px;
     border-radius: 20px;
 }
+.main-content a {
+    position: absolute;
+    margin: 10px;
+    top: 100%;
+    left: 0;
+    right: 0;
+    text-align: center;
+    color: #7775;
+}
+.main-content a:hover {
+    color: #777;
+}
 button {
     position: relative;
     padding: 0;
@@ -295,13 +307,21 @@ textarea::placeholder {
     gap: 10px;
     height: 425px;
 }
-.authorize, .create-profile {
+.authorize:not(.no-anim), .create-profile:not(.no-anim), .manage-profiles:not(.no-anim) {
     transition: opacity 0.5s ease-in-out, height 0.5s ease-in-out;
 }
-.authorize.hidden, .create-profile.hidden {
+.authorize.hidden, .create-profile.hidden, .manage-profiles.hidden {
     opacity: 0;
     height: 187px;
     pointer-events: none;
+}
+
+.manage-profiles {
+    grid-area: content;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    height: 430px;
 }
 
 .popup-wrapper {
@@ -314,6 +334,7 @@ textarea::placeholder {
     right: 0;
     bottom: 0;
     background: #0005;
+    transition: opacity 0.3s ease-out;
 }
 .popup-wrapper.hidden {
     opacity: 0;
@@ -327,6 +348,14 @@ textarea::placeholder {
     width: min(300px, 100vw);
     background: var(--bg-2);
     border-radius: 20px;
+    transition: transform 0.3s ease-out;
+}
+.popup-wrapper.hidden .popup {
+    transform: scale(0.9);
+    transition: transform 0.3s ease-in;
+}
+.popup > h1 {
+    text-align: center;
 }
 .popup .action-buttons {
     position: absolute;
