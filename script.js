@@ -158,6 +158,7 @@ function openContent(content) {
     toggleAuthorize(content == "authorize");
     toggleCreateProfile(content == "create");
     toggleManageProfiles(content == "manage");
+    document.querySelector(".main-content a").style.display = getParameter("c") ? "" : "none";
 }
 
 function loadProfiles() {
