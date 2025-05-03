@@ -41,6 +41,8 @@ html, body {
     font-family: "Iosevka Aile", sans-serif;
     user-select: none;
     -webkit-user-select: none;
+
+    touch-action: none;
 }
 ::selection {
     background-color: var(--accent);
@@ -99,6 +101,7 @@ button {
     text-align: left;
     background: none;
     border: none;
+    color: inherit;
     font-family: inherit;
     font-weight: 700;
     line-height: inherit;
@@ -174,6 +177,7 @@ input::placeholder {
 }
 input[type="file"] {
     padding: 0 10px;
+    color: inherit;
 }
 #avatar:after {
     content: "Avatar";
