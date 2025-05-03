@@ -252,15 +252,16 @@ function selectProfile(nickname) {
     window.localStorage.setItem("lastProfile", nickname);
 }
 
-function openAccountSelect() {
-    document.querySelector("#account-select").classList.add("expanded");
-    document.querySelectorAll("#account-select .dropdown button").forEach((elem) => elem.removeAttribute("disabled"));
+function toggleAccountSelect() {
+    document.querySelector("#account-select").classList.toggle("expanded");
+    let opened = document.querySelector("#account-select").classList.contains("expanded");
+    document.querySelectorAll("#account-select .dropdown button").forEach((elem) => opened ? elem.removeAttribute("disabled") : elem.setAttribute("disabled", ""));
 }
 function closeAccountSelect() {
     document.querySelector("#account-select").classList.remove("expanded");
     document.querySelectorAll("#account-select .dropdown button").forEach((elem) => elem.setAttribute("disabled", ""));
 }
-document.querySelector("#account-select .selected").addEventListener("click", openAccountSelect);
+document.querySelector("#account-select .selected").addEventListener("click", toggleAccountSelect);
 document.querySelector("#account-select").addEventListener("focusout", (e) => {
     if (!e.currentTarget.contains(e.relatedTarget)) {
         closeAccountSelect();
