@@ -14,6 +14,16 @@ function escapeHTML(s) {
     );
 }
 
+function arrayBufferToBase64(buffer) {
+    var binary = "";
+    var bytes = new Uint8Array( buffer );
+    var len = bytes.byteLength;
+    for (var i = 0; i < len; i++) {
+        binary += String.fromCharCode(bytes[i]);
+    }
+    return btoa(binary);
+}
+
 function isNickname(str) {
     return /^[a-zA-Z_0-9]*$/.test(str);
 }
@@ -403,7 +413,7 @@ document.querySelector("#authorize").addEventListener("click", async () => {
     let signature = await window.crypto.subtle.sign({name: "RSA-PSS", hash: "SHA-256", saltLength: 0}, profile.privateKey, challengeBytes);
     console.log(signature);
     const publicKeyBytes = new Uint8Array(await window.crypto.subtle.exportKey("spki", profile.publicKey));
-    redirectPost(`https://${host}/auth/`, {signature: btoa(signature), publicKey: btoa(publicKeyBytes), nickname: profile.nickname, bio: profile.bio, avatar: btoa(profile.avatar)});
+    redirectPost(`https://${host}/auth/`, {signature: arrayBufferToBase64(signature), publicKey: arrayBufferToBase64(publicKeyBytes), nickname: profile.nickname, bio: profile.bio, avatar: arrayBufferToBase64(profile.avatar)});
 });
 document.querySelector("#edit-profile").addEventListener("click", async () => {
     document.querySelector("#create-profile .loader").classList.remove("hidden");
