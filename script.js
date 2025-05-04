@@ -393,7 +393,7 @@ document.querySelector("#create-profile").addEventListener("click", async () => 
 })
 document.querySelector("#authorize").addEventListener("click", async () => {
     let profile = findByNickname(currentNickname);
-    let challengeBytes = new Uint8Array(host.length, challenge.length);
+    let challengeBytes = new Uint8Array(host.length + challenge.length);
     for (var i = 0; i < host.length; i++) {
         challengeBytes[i] = host.charCodeAt(i);
     }
