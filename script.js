@@ -410,7 +410,7 @@ document.querySelector("#authorize").addEventListener("click", async () => {
     for (var i = 0; i < challenge.length; i++) {
         challengeBytes[i + host.length] = challenge.charCodeAt(i);
     }
-    let signature = await window.crypto.subtle.sign({name: "RSA-PSS", hash: "SHA-256", saltLength: 0}, profile.privateKey, challengeBytes);
+    let signature = await window.crypto.subtle.sign({name: "RSA-PSS", hash: "SHA-256", saltLength: 32}, profile.privateKey, challengeBytes);
     console.log(signature);
     const publicKeyBytes = new Uint8Array(await window.crypto.subtle.exportKey("spki", profile.publicKey));
     redirectPost(`https://${host}/auth/`, {signature: arrayBufferToBase64(signature), publicKey: arrayBufferToBase64(publicKeyBytes), nickname: profile.nickname, bio: profile.bio, avatar: arrayBufferToBase64(profile.avatar)});
