@@ -289,9 +289,9 @@ textarea::placeholder {
 }
 
 .avatar {
-    margin: 5px;
-    width: 30px;
-    height: 30px;
+    margin: 4px;
+    width: 32px;
+    height: 32px;
     background-color: #7775;
     background-size: contain;
     background-repeat: no-repeat;
